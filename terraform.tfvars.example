@@ -1,0 +1,14 @@
+# Example terraform.tfvars file
+# Copy this file to terraform.tfvars and fill in your values
+
+abrha_api_key  = "your-abrha-api-key"
+ssh_public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC... your-email@example.com"
+region         = "tehran3"
+vm_size        = "irVPS2"
+vm_count       = 1
+image_slug     = "Ubuntu22-x64"
+ssh_key_name   = "main-ssh-key"
+vpc_name       = "mainVpc"
+vpc_ip_range   = "192.168.20.0"
+vpc_description = "Private network for Abrha Event"
+abrha_endpoint   = "https://my.abrha.net/cserver/api"
