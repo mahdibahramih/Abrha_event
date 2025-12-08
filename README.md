@@ -191,10 +191,3 @@ terraform force-unlock <lock-id>
 - [Terraform Documentation](https://www.terraform.io/docs)
 - [Abrha Cloud Portal](https://my.abrha.net)
 
-## License
-
-[Specify your license]
-
-## Contributing
-
-[Add contribution guidelines if applicable]
