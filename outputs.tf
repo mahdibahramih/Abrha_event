@@ -16,4 +16,11 @@ output "vm_names" {
 output "vm_ips" {
   description = "IP addresses of the created VMs"
   value       = abrha_vm.redis[*].ipv4_address
+  depends_on  = [time_sleep.wait_10s]
+}
+
+output "vm_private_ips" {
+  description = "IP addresses of the created VMs"
+  value       = abrha_vm.redis[*].ipv4_address_private
+  depends_on  = [time_sleep.wait_10s]
 }

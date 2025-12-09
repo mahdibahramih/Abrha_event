@@ -11,7 +11,6 @@ resource "abrha_vpc" "main" {
   name        = var.vpc_name
   region      = data.abrha_region.region.slug
   ip_range    = var.vpc_ip_range
-  description = var.vpc_description
 }
 
 resource "abrha_vm" "redis" {
@@ -24,4 +23,10 @@ resource "abrha_vm" "redis" {
   
   vpc_uuid = abrha_vpc.main.id
   ssh_keys = [abrha_ssh_key.main.id]
+}
+
+resource "time_sleep" "wait_10s" {
+  depends_on = [abrha_vm.redis]
+  
+  create_duration = "10s"
 }

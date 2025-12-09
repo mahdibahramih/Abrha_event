@@ -6,6 +6,10 @@ terraform {
       source  = "abrhacom/abrha"
       version = "1.3.3"
     }
+    time = {
+      source  = "hashicorp/time"
+      version = "~> 0.9"
+    }
   }
 }
 

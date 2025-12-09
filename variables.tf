@@ -49,9 +49,3 @@ variable "vpc_ip_range" {
   description = "IP range for the VPC"
   type        = string
 }
-
-variable "vpc_description" {
-  description = "Description of the VPC"
-  type        = string
-  default     = "Private network for Abrha Event"
-}
