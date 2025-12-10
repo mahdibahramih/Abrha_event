@@ -1,0 +1,70 @@
+---
+- name: Creating group for redis
+  group:
+    name: "{{ redis_group }}"
+    state: present
+  tags:
+    - group
+    - redis
+
+- name: Creating system user for redis
+  user:
+    name: "{{ redis_user }}"
+    group: "{{ redis_group }}"
+    shell: /sbin/nologin
+    password: "!!"
+    createhome: no
+    system: yes
+    state: present
+  tags:
+    - user
+    - redis
+
+
+
+- name: Add Redis signing key to keyring file
+  apt_key:
+    url: https://packages.redis.io/gpg
+    keyring: /usr/share/keyrings/redis-archive-keyring.gpg
+    state: present
+  register: _task
+  delay: 3
+  retries: 3
+  until: _task is succeeded
+
+
+- name: add redis repository
+  ansible.builtin.apt_repository:
+    repo: "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb  {{ ansible_distribution_release }} main"
+    state: present
+  tags: 
+    - install
+    - redis
+  register: _task
+  delay: 3
+  retries: 3
+  until: _task is succeeded
+
+- name: install redis 
+  apt:
+    name: redis-server={{ redis_version }}, redis-tools={{ redis_version }}
+    state: present
+    update_cache: yes
+  tags:
+    - install
+    - redis
+  register: _task
+  delay: 3
+  retries: 3
+  until: _task is succeeded
+
+- name: Creating the redis directory
+  file:
+    path: "/etc/redis/"
+    state: directory
+    owner: "{{ redis_user }}"
+    group: "{{ redis_group }}"
+    mode: 0755
+  tags:
+    - directory
+    - redis

@@ -1,0 +1,22 @@
+---
+# Variable setup.
+- name: Include OS-specific variables.
+  include_vars: "{{ ansible_os_family }}.yml"
+
+- name: Configure sysctl 
+  include_tasks: sysctl.yml
+
+- name: install redis
+  include_tasks: setup-Debian.yml
+  when: ansible_os_family == 'Debian'
+
+- name: configure redis
+  include_tasks: configure.yml
+
+- name: Flush handlers
+  meta: flush_handlers
+
+- name: create cluster
+  include_tasks: setup-cluster.yml
+  tags: cluster
+  when: redis_cluster_enabled == 'yes'

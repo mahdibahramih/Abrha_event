@@ -1,0 +1,9 @@
+---
+- name: set kernel param
+  sysctl:
+    name: "{{ item.key }}"
+    value: "{{ item.value }}"
+    sysctl_set: yes
+    state: present
+    reload: yes
+  with_dict: "{{ kernel_params }}"

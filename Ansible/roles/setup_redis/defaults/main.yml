@@ -1,0 +1,97 @@
+---
+############### common parameter
+redis_version: "6:7.0.12-1rl1~jammy1"
+redis_user: "redis"
+redis_group: "redis"
+redis_systemd_path: "/lib/systemd/system/redis-server.service"
+############### Redis parameters
+redis_master_port: 6379
+redis_master_auth: ""
+redis_use_pass: 'no'
+redis_port: 6379
+redis_bind_interface: 0.0.0.0
+redis_bind_source_addr: 0.0.0.0
+redis_requirepass: ""
+redis_protected_mode: 'no'
+redis_supervised: systemd
+redis_daemonize: 'yes'
+redis_tcp_backlog: 65535
+redis_timeout: 0
+redis_tcp_keepalive: 300
+redis_databases: 16
+redis_logfile: /var/log/redis/redis-server.log
+redis_loglevel: "notice"
+redis_stop_writes_on_bgsave_error: 'yes'
+redis_rdbcompression: 'yes'
+redis_rdbchecksum: 'yes'
+redis_dbfilename: 'dump.rdb'
+redis_rdb_del_sync_files: 'no'
+redis_save: " "
+redis_dbdir: /var/lib/redis   #### if you change this folder you need set permission to redis:redis
+redis_replica_serve_stale_data: 'no'
+redis_replica_read_only: 'yes'
+redis_repl_diskless_sync: 'no'
+redis_repl_diskless_sync_max_replicas : '0'
+redis_repl_diskless_load: 'disabled'
+redis_repl_diskless_sync_delay: 5
+redis_repl_disable_tcp_nodelay: 'no'
+redis_repl_backlog_size: 64mb
+redis_repl_timeout: 120
+redis_replica_priority: 100
+redis_lazyfree_lazy_eviction: 'no'
+redis_lazyfree_lazy_expire: 'no'
+redis_free_lazy_server_del: 'no'
+redis_replica_lazy_flush: 'no'
+redis_lazyfree_lazy_user_del: 'no'
+redis_lazyfree_lazy_user_flush: 'no'
+redis_oom_score_adj: 'no'
+redis_oom_score_adj_values: '0 200 800'
+redis_disable_thp: 'yes'
+redis_appendonly: 'yes'
+redis_appendfilename: "appendonly.aof"
+redis_appenddirname: 'appendonlydir'
+redis_pidfile: /run/redis/redis-server.pid   # this variable is very important to run with systemd
+redis_appendfsync: everysec
+redis_no_appendfsync_on_rewrite: 'no'
+redis_auto_aof_rewrite_percentage: 100
+redis_auto_aof_rewrite_min_size: 64mb
+redis_aof_load_truncated: 'yes'
+redis_aof_use_rdb_preamble: 'yes'
+redis_aof_timestamp_enabled: 'no'
+redis_shutdown_timeout: '10'
+redis_cluster_enabled: 'no'
+redis_aof_rewrite_incremental_fsync: 'yes'
+redis_lua_time_limit: 5000
+redis_slowlog_log_slower_than: 10000
+redis_slowlog_max_len: 128
+redis_latency_monitor_threshold: 0
+redis_notify_keyspace_events: ""
+redis_hash_max_listpack_entries: 512
+redis_hash_max_listpack_value: 64
+redis_list_max_listpack_size: '-5'
+redis_list_compress_depth: '0'
+redis_set_max_intset_entries: 512
+redis_zset_max_listpack_entries: 128
+redis_zset_max_listpack_value: 64
+redis_hll_sparse_max_bytes: 3000
+redis_stream_node_max_bytes: 4096
+redis_stream_node_max_entries: 100
+redis_activerehashing: 'yes'
+redis_client_output_buffer_limit_1: 'normal 0 0 0'
+redis_client_output_buffer_limit_2: 'replica 0 0 0'
+redis_client_output_buffer_limit_3: 'pubsub 256mb 256mb 60'
+redis_hz: 10
+redis_dynamic_hz: 'yes'
+redis_rdb_save_incremental_fsync: 'yes'
+redis_jemalloc_bg_thread: 'yes'
+redis_maxmemory: 1gb
+redis_maxmemory_policy: allkeys-lru
+redis_maxmemory_samples: 5
+redis_maxclients: 65503
+
+
+kernel_params:
+  vm.overcommit_memory: "1"
+  vm.swappiness: "1"
+  net.core.somaxconn: "65535"
+  

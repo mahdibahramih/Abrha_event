@@ -1,0 +1,13 @@
+---
+#### This playbook only setup redis
+- hosts: redis_cluster
+  become: true
+  vars:
+    redis_version: '6:7.0.12-1rl1~jammy1'
+    redis_port: 6379
+    redis_use_pass: 'no'
+    redis_maxmemory: 1gb
+    redis_cluster_enabled: 'yes'
+    redis_cluster_replicas: 1
+  roles:
+    - setup_redis 

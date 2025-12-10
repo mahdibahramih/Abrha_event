@@ -1,0 +1,43 @@
+- name: Ensure Redis configuration dir exists.
+  file:
+    path: "{{ redis_conf_path | dirname }}"
+    state: directory
+    mode: 0755
+  tags: directory
+
+- name: Ensure Redis pid dir exists.
+  file:
+    path: "{{ redis_pidfile | dirname }}"
+    state: directory
+    mode: 0755
+    owner: redis
+    group: redis
+  tags: directory
+
+- name: Ensure Redis data dir exists.
+  file:
+    path: "{{ redis_dbdir }}"
+    state: directory
+    mode: 0755
+    owner: redis
+    group: redis
+  tags: directory
+
+- name: Ensure Redis is configured.
+  template:
+    src: redis.conf.j2
+    dest: "{{ redis_conf_path }}"
+    owner: redis
+    group: redis
+  notify: restart redis
+  tags: configuration
+
+
+- name: Ensure Redis systemd configured.
+  template:
+    src: redis-server.service.j2
+    dest: "{{ redis_systemd_path }}"
+    owner: redis
+    group: redis
+  notify: restart redis
+  tags: configuration

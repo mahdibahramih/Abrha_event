@@ -1,0 +1,10 @@
+---
+- name: setup cluster
+  shell: > 
+    redis-cli --cluster create
+    {% for hn in groups['redis_cluster'] %} {{ hostvars[hn].redis_bind_interface }}:{{redis_port}} {% endfor %}
+    --cluster-replicas {{ redis_cluster_replicas }}
+    {% if redis_use_pass == 'yes' %} -a {{ redis_master_auth }} {% endif %}
+    --cluster-yes 
+  run_once: true
+  tags: cluster
